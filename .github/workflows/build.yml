@@ -1,0 +1,17 @@
+name: Build PS3 PKG
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ps3dev/ps3dev:latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Compile Code
+      run: |
+        make
+    - name: Upload PKG Product
+      uses: actions/upload-artifact@v3
+      with:
+        name: PS3-Chat-App
+        path: "*.pkg"
